@@ -3,13 +3,30 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon App.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/App.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mongoose": "^8.15.1",
+    "cors": "^2.8.5",
+    "mongoose-delete": "^1.0.2",
+    "mongodb": "^6.16.0",
+    "jsonwebtoken": "^9.0.2",
+    "path": "^0.12.7",
+    "fs": "^0.0.1-security",
+    "dayjs": "^1.11.13",
+    "axios": "^1.9.0",
+    "dotenv": "^16.5.0",
+    "bcryptjs": "^3.0.2"
+    
+  },
+   "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
