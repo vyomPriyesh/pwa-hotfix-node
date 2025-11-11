@@ -1,15 +1,15 @@
-import Party from "../models/Party.js";
+import Worktype from "../models/Worktype.js";
 import buildFilters from "../utils/buildFilters.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import paginate from "../utils/pagination.js";
 import { sendResponse } from "../utils/response.js";
 
-class PartyController {
+class WorkTypeController {
 
     static add = catchAsync(async (req, res) => {
 
         const data = req.body
-        const added = await Party.create(data)
+        const added = await Worktype.create(data)
         return sendResponse(res, 200, 'Added', true, added);
 
     })
@@ -18,38 +18,38 @@ class PartyController {
 
         const { id } = req.params
         const data = req.body
-        const party = await Party.findById(id)
-        if (!party) {
-            return sendResponse(res, 500, 'Party Not Found', false)
+        const worktype = await Worktype.findById(id)
+        if (!worktype) {
+            return sendResponse(res, 500, 'Work Type Not Found', false)
         }
-        const updated = await Party.findByIdAndUpdate(id, data, { new: true })
+        const updated = await Worktype.findByIdAndUpdate(id, data, { new: true })
         return sendResponse(res, 200, 'Updated', true, updated);
 
     })
     static delete = catchAsync(async (req, res) => {
 
         const { id } = req.params
-        const party = await Party.findById(id)
-        if (!party) {
-            return sendResponse(res, 500, 'Party Not Found', false)
+        const worktype = await Worktype.findById(id)
+        if (!worktype) {
+            return sendResponse(res, 500, 'Work Type Not Found', false)
         }
-        await Party.delete({ _id: id })
+        await Worktype.delete({ _id: id })
         return sendResponse(res, 200, 'Deleted', true);
 
     })
     static statusUpdate = catchAsync(async (req, res) => {
 
         const { id } = req.params
-        const party = await Party.findById(id)
-        if (!party) {
-            return sendResponse(res, 500, 'Party Not Found', false)
+        const worktype = await Worktype.findById(id)
+        if (!worktype) {
+            return sendResponse(res, 500, 'Work Type Not Found', false)
         }
-        const updated = await Party.findByIdAndUpdate(id, { status: !party?.status }, { new: true })
+        const updated = await Worktype.findByIdAndUpdate(id, { status: !worktype?.status }, { new: true })
         return sendResponse(res, 200, 'Deleted', true, updated);
 
     })
 
-    static allParty = catchAsync(async (req, res) => {
+    static allworktype = catchAsync(async (req, res) => {
 
         const { page, limit, ...allFilters } = req.body || {}
 
@@ -57,12 +57,12 @@ class PartyController {
 
         const query = await buildFilters(allFilters, searchKeys)
 
-        const allParty = await paginate(Party, query, page, limit)
-        
-        return sendResponse(res, 200, 'All Party', true, allParty);
+        const allWorktype = await paginate(Worktype, query, page, limit)
+
+        return sendResponse(res, 200, 'All Work Type', true, allWorktype);
 
     })
 
 }
 
-export default PartyController;
+export default WorkTypeController;

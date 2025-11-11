@@ -3,6 +3,7 @@ import connectDB from "./db/Connectdb.js";
 import api from "./routes/api.js";
 import cors from "cors";
 import { sendResponse } from "./utils/response.js";
+import { assetsUrl, folderName } from "./Config.js";
 
 const app = express();
 const port = 3000;
@@ -22,6 +23,7 @@ app.use((err, req, res, next) => {
     error_message: err.message
   }, false);
 });
+app.use(`/${folderName}`, express.static(assetsUrl));
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);

@@ -5,6 +5,12 @@ const { Schema } = mongoose;
 const PartySchema = new Schema(
     {
         name: { type: String },
+        contact_person: { type: String },
+        email: { type: String },
+        mobile: { type: String },
+        address: { type: String },
+        gst: { type: String },
+        pancard: { type: String },
         status: { type: Boolean, default: true }
     },
     {

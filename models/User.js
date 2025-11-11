@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema(
     {
+        work_type: { type: Schema.Types.ObjectId, ref: "Worktype", },
         name: { type: String },
         email: { type: String },
         mobile: { type: String, unique: true },
@@ -12,6 +13,7 @@ const UserSchema = new Schema(
         role: { type: String },
         work_from: { type: Date },
         work_to: { type: Date },
+        profile_image: { type: Boolean },
         design_image: { type: Boolean },
         challan_image: { type: Boolean },
         login_devices: [

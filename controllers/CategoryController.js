@@ -1,4 +1,5 @@
 import Category from "../models/Category.js";
+import buildFilters from "../utils/buildFilters.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import paginate from "../utils/pagination.js";
 import { sendResponse } from "../utils/response.js";
@@ -50,8 +51,14 @@ class CategoryController {
 
     static allCtg = catchAsync(async (req, res) => {
 
-        const { page, limit } = req.body || {}
-        const allCtg = await paginate(Category, null, page, limit)
+        const { page, limit, ...allFilters } = req.body || {}
+
+        const searchKeys = ['name']
+
+        const query = await buildFilters(allFilters, searchKeys)
+
+        const allCtg = await paginate(Category, query, page, limit)
+        
         return sendResponse(res, 200, 'All Category', true, allCtg);
 
     })
