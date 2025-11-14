@@ -69,21 +69,20 @@ class AuthController {
         if (!user) {
             return sendResponse(res, 500, 'User Not Found', false)
         }
-        return sendResponse(res, 200, 'Login successful', true, user)
+        return sendResponse(res, 200, 'Profile', true, user)
     })
     static updateprofile = catchAsync(async (req, res) => {
 
-        const token = req.headers.authorization.split(" ")[1]
-        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const { id } = req.params
         const data = req.body
         delete data.password
         delete data.mobile
-        const user = await User.findById(decoded?.id).select("-login_devices -password")
+        const user = await User.findById(id).select("-login_devices -password")
         if (!user) {
             return sendResponse(res, 500, 'User Not Found', false)
         }
-        const update = await User.findByIdAndUpdate(decoded?.id, data, { new: true }).select("-login_devices -password")
-        return sendResponse(res, 200, 'Login successful', true, update)
+        const update = await User.findByIdAndUpdate(id, data, { new: true }).select("-login_devices -password")
+        return sendResponse(res, 200, 'Profile Updated', true, update)
     })
 
     static changePassword = catchAsync(async (req, res) => {
@@ -98,7 +97,7 @@ class AuthController {
         }
         const update = await User.findByIdAndUpdate(id, { password: newPass }, { new: true }).select("-password -login_devices")
 
-        return sendResponse(res, 200, 'Login successful', true, update)
+        return sendResponse(res, 200, 'Password Update successful', true, update)
 
     })
 

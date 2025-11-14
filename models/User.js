@@ -11,9 +11,10 @@ const UserSchema = new Schema(
         other_mobile: { type: String },
         password: { type: String },
         role: { type: String },
-        work_from: { type: Date },
-        work_to: { type: Date },
-        profile_image: { type: Boolean },
+        date_of_birth: { type: Date },
+        work_from: { type: String },
+        work_to: { type: String },
+        profile_image: { type: String },
         design_image: { type: Boolean },
         challan_image: { type: Boolean },
         login_devices: [
