@@ -8,14 +8,10 @@ import { assetsUrl, folderName } from "./Config.js";
 const app = express();
 const port = 3000;
 const DATABASE_URL = process.env.DATABASE_URL || "mongodb://127.0.0.1:27017";
+
+connectDB(DATABASE_URL);
 app.use(express.json());
 app.use(cors());
-connectDB(DATABASE_URL);
-
-// app.get('/', (req, res) => {
-//     res.send('Hello World!');
-// });
-app.use("/api", api);
 app.use((err, req, res, next) => {
   console.error(err); // log it
   return sendResponse(res, 500, {
@@ -23,7 +19,12 @@ app.use((err, req, res, next) => {
     error_message: err.message
   }, false);
 });
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
 app.use(`/${folderName}`, express.static(assetsUrl));
+app.use("/api", api);
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
