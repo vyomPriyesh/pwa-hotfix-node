@@ -13,7 +13,7 @@
   "routes": [
     {
       "src": "/assets/(.*)",
-      "dest": "/app.js"
+      "dest": "/assets/$1"  
     },
     {
       "src": "/api/(.*)",
