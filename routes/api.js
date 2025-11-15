@@ -31,13 +31,13 @@ api.get('/', catchAsync(async (req, res) => {
 }));
 
 api.post('/images/upload', catchAsync(async (req, res) => {
-    await uploadFileMiddleware(req, res);
+    await uploadFileMiddleware(req, res);   
 
     if (req?.files?.length === 0) {
         return sendResponse(res, 400, 'Please upload at least one file!', false);
     }
-    const filenames = req.files.map(file => file.filename);
-    const formattedImages = filenames.map(filename => `/${folderName}/${filename}`);
+    const filenames = req.files?.map(file => file.filename);
+    const formattedImages = filenames?.map(filename => `/${folderName}/${filename}`);
     return sendResponse(res, 200, 'Files uploaded successfully!', true, formattedImages);
 }));
 
