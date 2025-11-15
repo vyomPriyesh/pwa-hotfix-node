@@ -2,10 +2,9 @@
   "name": "pwa-hotfix-node",
   "version": "1.0.0",
   "main": "app.js",
-  "scripts": {
-    "start": "nodemon App.js",
+ "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/App.js"
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
