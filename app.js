@@ -3,7 +3,7 @@ import connectDB from "./db/Connectdb.js";
 import api from "./routes/api.js";
 import cors from "cors";
 import { sendResponse } from "./utils/response.js";
-import { assetsUrl, folderName } from "./Config.js";
+import { assetsUrl, folderName, uploadPath } from "./Config.js";
 
 const app = express();
 const port = 3000;
@@ -24,7 +24,7 @@ app.use((err, req, res, next) => {
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
-app.use(`/${folderName}`, express.static(assetsUrl));
+app.use(`/${folderName}`, express.static(uploadPath));
 app.use("/api", api);
 
 app.listen(port, () => {
