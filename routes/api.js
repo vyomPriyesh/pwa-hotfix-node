@@ -14,14 +14,25 @@ import { sendResponse } from "../utils/response.js";
 import WorkTypeController from "../controllers/WorkTypeController.js";
 import DesignController from "../controllers/DesignController.js";
 import ChallanController from "../controllers/ChallanController.js";
+import mongoose from "mongoose";
 
 const api = express.Router();
 
 const upload = multer();
 
+api.get('/', catchAsync(async (req, res) => {
+    const connectionState = mongoose.connection.readyState;
+    // 1 means connected
+    if (connectionState === 1) {
+        return sendResponse(res, 200, 'Files uploaded successfully!', true, { state: 'connected' });
+    } else {
+        return sendResponse(res, 500, 'Database not connected', false, { state: 'disconnected' });
+    }
+}));
+
 api.post('/images/upload', catchAsync(async (req, res) => {
     await uploadFileMiddleware(req, res);
-    
+
     if (req?.files?.length === 0) {
         return sendResponse(res, 400, 'Please upload at least one file!', false);
     }
